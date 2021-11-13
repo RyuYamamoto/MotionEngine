@@ -16,62 +16,6 @@ items:
       children: 
         - 
           id: 2
-          name: "JAXON2"
-          plugin: Body
-          class: BodyItem
-          is_checked: true
-          data: 
-            file: "../jaxon2-draft/model/JAXON2/JAXON2.body"
-            format: CHOREONOID-BODY
-            rootPosition: [ 0, 0, 1.0225 ]
-            rootAttitude: [ 
-              1, 0, 0, 
-              0, 1, 0, 
-              0, 0, 1 ]
-            jointDisplacements: [ 
-              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-              0, 0, 0, 0, 0, 0, 0, 0, 0, -15.8251, 
-              0, 0, 0, 0, 0, 0, 0, 15.8251, 0, 0, 
-              0, 0, 0, 0, 0, 0, 0, 0 ]
-            jointPositions: [ 
-              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-              0, 0, 0, 0, 0, 0, 0, 0, 0, -0.2762, 
-              0, 0, 0, 0, 0, 0, 0, 0.2762, 0, 0, 
-              0, 0, 0, 0, 0, 0, 0, 0 ]
-            initialRootPosition: [ 0, 0, 1.0225 ]
-            initialRootAttitude: [ 
-              1, 0, 0, 
-              0, 1, 0, 
-              0, 0, 1 ]
-            initialJointPositions: [ 
-              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-              0, 0, 0, 0, 0, 0, 0, 0, 0, -0.2762, 
-              0, 0, 0, 0, 0, 0, 0, 0.2762, 0, 0, 
-              0, 0, 0, 0, 0, 0, 0, 0 ]
-            staticModel: false
-            collisionDetection: true
-            selfCollisionDetection: false
-            location_editable: true
-            scene_sensitive: true
-            link_kinematics: 
-              "RANGE_LINK": 
-                base_frame: 0
-                offset_frame: 0
-            zmp: [ 0, 0, 0 ]
-          children: 
-            - 
-              id: 3
-              name: "MotionEngine"
-              plugin: Body
-              class: SimpleControllerItem
-              data: 
-                isNoDelayMode: false
-                controllerOptions: ""
-                base_directory: "Controller directory"
-                reloading: false
-                export_symbols: false
-        - 
-          id: 4
           name: "Floor"
           plugin: Body
           class: BodyItem
@@ -97,11 +41,10 @@ items:
             scene_sensitive: true
             zmp: [ 0, 0, 0 ]
         - 
-          id: 5
+          id: 3
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
-          is_selected: true
           data: 
             timeStep: 0.001
             realtimeSync: true
@@ -129,6 +72,60 @@ items:
             kinematicWalking: false
             2Dmode: false
             oldAccelSensorMode: false
+        - 
+          id: 4
+          name: "JAXON_JVRC"
+          plugin: Body
+          class: BodyItem
+          is_selected: true
+          is_checked: true
+          data: 
+            file: "../model/JAXONmain.yaml"
+            format: CHOREONOID-BODY
+            rootPosition: [ 0.00174358538, -0.000390684217, 0.981712464 ]
+            rootAttitude: [ 
+              0.999997873, -0.000110864294, -0.00205956151, 
+              0.000110908354, 0.999999994, 2.12784969e-05, 
+              0.00205955913, -2.15068743e-05, 0.999997879 ]
+            jointDisplacements: [ 
+              0, 0, -20, 40, -20, 0, 0, 0, -20, 40, 
+              -20, 0, 0, 0, 0, 0, 0, 0, 40, -20, 
+              -5, -80, 0, 0, -20, 0, 40, 20, 5, -80, 
+              0, 0, -20, 0, 0, 0, 0, 0 ]
+            jointPositions: [ 
+              0, 0, -0.349066, 0.698132, -0.349066, 0, 0, 0, -0.349066, 0.698132, 
+              -0.349066, 0, 0, 0, 0, 0, 0, 0, 0.698132, -0.349066, 
+              -0.0872665, -1.39626, 0, 0, -0.349066, 0, 0.698132, 0.349066, 0.0872665, -1.39626, 
+              0, 0, -0.349066, 0, 0, 0, 0, 0 ]
+            initialRootPosition: [ 0.00174358538, -0.000390684217, 0.981712464 ]
+            initialRootAttitude: [ 
+              0.999997873, -0.000110864294, -0.00205956151, 
+              0.000110908354, 0.999999994, 2.12784969e-05, 
+              0.00205955913, -2.15068743e-05, 0.999997879 ]
+            initialJointPositions: [ 
+              0, 0, -0.349066, 0.698132, -0.349066, 0, 0, 0, -0.349066, 0.698132, 
+              -0.349066, 0, 0, 0, 0, 0, 0, 0, 0.698132, -0.349066, 
+              -0.0872665, -1.39626, 0, 0, -0.349066, 0, 0.698132, 0.349066, 0.0872665, -1.39626, 
+              0, 0, -0.349066, 0, 0, 0, 0, 0 ]
+            staticModel: false
+            collisionDetection: true
+            selfCollisionDetection: false
+            location_editable: true
+            scene_sensitive: true
+            zmp: [ 0, 0, 0 ]
+          children: 
+            - 
+              id: 5
+              name: "MotionEngine"
+              plugin: Body
+              class: SimpleControllerItem
+              data: 
+                isNoDelayMode: false
+                controllerOptions: ""
+                controller: "Controller"
+                base_directory: "Controller directory"
+                reloading: false
+                export_symbols: false
 views: 
   - 
     id: 0
@@ -141,7 +138,7 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      expanded: [ 1, 2 ]
+      expanded: [ 1, 4, 5 ]
   - 
     id: 2
     plugin: Base
@@ -205,9 +202,9 @@ views:
           fieldOfView: 0.610865
           near: 0.04
           far: 200
-          eye: [ 8.69459, 5.04103, 4.45854 ]
-          direction: [ -0.80362, -0.474801, -0.358829 ]
-          up: [ -0.308937, -0.182528, 0.933403 ]
+          eye: [ 8.34618, 1.08214, 3.33574 ]
+          direction: [ -0.931138, -0.153754, -0.33067 ]
+          up: [ -0.326252, -0.0538722, 0.943747 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -245,7 +242,7 @@ views:
     class: LinkPositionView
     mounted: true
     state: 
-      coordinate_mode: base
+      coordinate_mode: world
       preferred_coordinate_mode: base
       show_rpy: true
       unique_rpy: false
@@ -269,7 +266,7 @@ toolbars:
     frameRate: 1000
     playbackFrameRate: 60
     idleLoopDrivenMode: false
-    currentTime: 0
+    currentTime: 7.707
     speedScale: 1
     syncToOngoingUpdates: true
     autoExpansion: true
@@ -289,8 +286,8 @@ Body:
   "BodyMotionEngine": 
     updateJointVelocities: false
   "BodySelectionManager": 
-    current_body_item: 2
-    current_link: "WAIST_LINK"
+    current_body_item: 4
+    current_link: "WAIST"
   "EditableSceneBody": 
     editableSceneBodies: 
       - 
@@ -324,12 +321,12 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 1501, 477 ]
+      sizes: [ 1285, 409 ]
       children: 
         - 
           type: splitter
           orientation: horizontal
-          sizes: [ 388, 1109 ]
+          sizes: [ 332, 949 ]
           children: 
             - 
               type: splitter
