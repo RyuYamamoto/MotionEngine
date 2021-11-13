@@ -1,0 +1,3 @@
+[submodule "jaxon2-draft"]
+	path = jaxon2-draft
+	url = git@github.com:choreonoid/jaxon2-draft.git
