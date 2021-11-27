@@ -31,4 +31,3 @@ target_link_libraries(Controller
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
 install(TARGETS Controller LIBRARY DESTINATION /usr/local/lib/choreonoid-1.8/simplecontroller)
-install(FILES gain.csv DESTINATION /usr/local/lib/choreonoid-1.8/simplecontroller)
