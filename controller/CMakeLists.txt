@@ -19,7 +19,12 @@ link_directories(
 	${Boost_LIBRARY_DIRS}
 )
 
-add_library(Controller SHARED Controller.cpp)
+set(MOTION_ENGINE_SRC
+	MotionEngine.hpp MotionEngine.cpp
+	Kinematics.hpp Kinematics.cpp
+)
+
+add_library(Controller SHARED Controller.cpp ${MOTION_ENGINE_SRC})
 set_target_properties(Controller PROPERTIES PREFIX "")
 
 set(target Controller)
