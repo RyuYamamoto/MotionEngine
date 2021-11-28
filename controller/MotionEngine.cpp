@@ -40,6 +40,7 @@ void MotionEngine::jointControl()
     double ref_dq = (joint_angles_[idx].ref_q - joint_angles_[idx].prev_ref_q) / dt_;
     double u = (joint_angles_[idx].ref_q - q) * p_gain[idx] + (ref_dq - dq) * d_gain[idx];
     joint->u() = std::max(std::min(u, 500.0), -500.0);
+    joint_angles_[idx].prev_ref_q = joint_angles_[idx].ref_q;
     joint_angles_[idx].prev_q = q;
   }
 }
