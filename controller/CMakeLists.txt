@@ -22,6 +22,7 @@ link_directories(
 set(MOTION_ENGINE_SRC
 	MotionEngine.hpp MotionEngine.cpp
 	Kinematics.hpp Kinematics.cpp
+	utils.hpp
 )
 
 add_library(Controller SHARED Controller.cpp ${MOTION_ENGINE_SRC})
