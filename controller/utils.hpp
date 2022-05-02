@@ -3,6 +3,7 @@
 
 #include <string>
 
+// TODO: load from yaml
 const double p_gain[] = {
   33000, 83000, 33000, 33000, 47000, 33000,
   33000, 83000, 33000, 33000, 47000, 33000,

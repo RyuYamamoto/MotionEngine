@@ -33,7 +33,7 @@ void MotionEngine::control()
 void MotionEngine::jointControl()
 {
   for (std::size_t idx = 0; idx < body_->numJoints(); ++idx) {
-    if(idx == 37) continue;
+    if(idx == 37) continue; // for JAXON
     cnoid::Link* joint = body_->joint(idx);
     double q = joint->q();
     double dq = (q - joint_angles_[idx].prev_q) / dt_;
