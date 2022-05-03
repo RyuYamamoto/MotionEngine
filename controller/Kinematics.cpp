@@ -56,3 +56,42 @@ bool Kinematics::calcInverseKinematics(
 
   return result;
 }
+
+bool Kinematics::calComKinematics(
+  cnoid::Vector3 ref_com, cnoid::Vector3 cur_com, const std::string link_name)
+{
+  int iteration = 100;
+  double gain = 0.5;
+  double error_eps = 1e-06;
+  double lambda = 1.0e-12;
+
+  cnoid::VectorXd dq(body_->numJoints());
+  cnoid::VectorXd v(body_->numJoints());
+  cnoid::MatrixXd J_com(3, body_->numJoints());
+
+  bool result = false;
+
+  for (int n = 0; n < iteration; n++) {
+    if (ref_com.dot(ref_com) < error_eps) {
+      result = true;
+      break;
+    }
+
+    if (link_name == "RLEG_JOINT5")
+      cnoid::calcCMJacobian(body_, right_foot_path_->baseLink(), J_com);
+    else if (link_name == "LLEG_JOINT5")
+      cnoid::calcCMJacobian(body_, left_foot_path_->baseLink(), J_com);
+
+    cnoid::MatrixXd JJ =
+      J_com * J_com.transpose() + lambda * cnoid::MatrixXd::Identity(J_com.rows(), J_com.rows());
+
+    Eigen::ColPivHouseholderQR<cnoid::MatrixXd> QR;
+    dq = J_com.transpose() * QR.compute(JJ).solve(ref_com - cur_com) * gain;
+    for (std::size_t idx = 0; idx < body_->numJoints(); ++idx)
+      body_->joint(idx)->q() += 0.3 * dq(idx);
+
+    body_->calcForwardKinematics();
+  }
+
+  return result;
+}

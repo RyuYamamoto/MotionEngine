@@ -35,6 +35,8 @@ private:
   cnoid::Vector3 right_foot_rot_;
   cnoid::Vector3 left_foot_pos_;
   cnoid::Vector3 left_foot_rot_;
+
+  cnoid::Vector3 com_;
 };
 
 #endif

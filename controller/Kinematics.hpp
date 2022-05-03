@@ -8,6 +8,7 @@
 #include <cnoid/JointPath>
 #include <cnoid/Link>
 #include <cnoid/SimpleController>
+#include <cnoid/Jacobian>
 
 #include <iostream>
 
@@ -20,6 +21,7 @@ public:
   void calcForwaredKinematicsAll();
   void calcForwaredKinematics(const std::string end_effector_name);
   bool calcInverseKinematics(cnoid::Vector3 pos, cnoid::Vector3 rot, const std::string link_name);
+  bool calComKinematics(cnoid::Vector3 ref_com, cnoid::Vector3 cur_com, const std::string link_name);
 
   void getFootPos(
     cnoid::Vector3 & right_foot_pos, cnoid::Vector3 & right_foot_rot,

@@ -25,6 +25,8 @@ void MotionEngine::initialize(cnoid::SimpleControllerIO * io)
   kinematics_->calcForwaredKinematicsAll();
   kinematics_->setRefAngle(joint_angles_);
   kinematics_->getFootPos(right_foot_pos_, right_foot_rot_, left_foot_pos_, left_foot_rot_);
+
+  com_ = body_->calcCenterOfMass();
 }
 
 // motion command generate
@@ -46,6 +48,12 @@ void MotionEngine::control()
   double l_stick[2], r_stick[2];
   receiveCommand(l_stick, r_stick);
 
+  com_.z() += (0.0001 * l_stick[0]);
+  kinematics_->calComKinematics(com_, body_->calcCenterOfMass(), "RLEG_JOINT5");
+  kinematics_->calComKinematics(com_, body_->calcCenterOfMass(), "LLEG_JOINT5");
+
+  joint_angles_ = kinematics_->getRefAngle();
+#if 0
   // TODO: ik demo
   left_foot_pos_.z() += (0.0001 * l_stick[0]);
   right_foot_pos_.z() += (0.0001 * l_stick[0]);
@@ -56,7 +64,7 @@ void MotionEngine::control()
     kinematics_->calcInverseKinematics(right_foot_pos_, right_foot_rot_, "RLEG_JOINT5") and
     kinematics_->calcInverseKinematics(left_foot_pos_, left_foot_rot_, "LLEG_JOINT5"))
     joint_angles_ = kinematics_->getRefAngle();
-
+#endif
   jointControl();
 }
 
