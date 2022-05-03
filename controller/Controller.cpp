@@ -1,13 +1,13 @@
-#include "MotionEngine.hpp"
 #include "Kinematics.hpp"
+#include "MotionEngine.hpp"
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 
 class Controller : public cnoid::SimpleController
 {
 public:
-  virtual bool initialize(cnoid::SimpleControllerIO* io) override
+  virtual bool initialize(cnoid::SimpleControllerIO * io) override
   {
     motion_engine_ = std::make_shared<MotionEngine>();
 
