@@ -1,8 +1,9 @@
 items: 
   id: 0
-  name: "Root"
+  name: "RootItem"
   plugin: Base
   class: RootItem
+  is_builtin_item: true
   children: 
     - 
       id: 1
@@ -45,6 +46,7 @@ items:
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
+          is_selected: true
           data: 
             timeStep: 0.001
             realtimeSync: true
@@ -82,31 +84,31 @@ items:
           data: 
             file: "../model/JAXONmain.yaml"
             format: CHOREONOID-BODY
-            rootPosition: [ 0.00174358538, -0.000390684217, 0.981712464 ]
+            rootPosition: [ -0.203416127, 0.016998973, 0.988955373 ]
             rootAttitude: [ 
-              0.999997873, -0.000110864294, -0.00205956151, 
-              0.000110908354, 0.999999994, 2.12784969e-05, 
-              0.00205955913, -2.15068743e-05, 0.999997879 ]
+              0.739966074, -0.672536635, -0.0120284779, 
+              0.672360563, 0.740055036, -0.0158056233, 
+              0.0195315963, 0.0036081508, 0.99980273 ]
             jointDisplacements: [ 
               0, 0, -20, 40, -20, 0, 0, 0, -20, 40, 
               -20, 0, 0, 0, 0, 0, 0, 0, 40, -20, 
-              -5, -80, 0, 0, -20, 0, 40, 20, 5, -80, 
-              0, 0, -20, 0, 0, 0, 0, 0 ]
+              -5, -80, 0, 0, -20, 0, 40, 0, 0, -20, 
+              40, -20, 0, 0, 0, -20, 40, 0.000316824 ]
             jointPositions: [ 
               0, 0, -0.349066, 0.698132, -0.349066, 0, 0, 0, -0.349066, 0.698132, 
               -0.349066, 0, 0, 0, 0, 0, 0, 0, 0.698132, -0.349066, 
-              -0.0872665, -1.39626, 0, 0, -0.349066, 0, 0.698132, 0.349066, 0.0872665, -1.39626, 
-              0, 0, -0.349066, 0, 0, 0, 0, 0 ]
-            initialRootPosition: [ 0.00174358538, -0.000390684217, 0.981712464 ]
+              -0.0872665, -1.39626, 0, 0, -0.349066, 0, 0.698132, 0, 0, -0.349066, 
+              0.698132, -0.349066, 0, 0, 0, -0.349066, 0.698132, 5.52962e-06 ]
+            initialRootPosition: [ -0.203416127, 0.016998973, 0.988955373 ]
             initialRootAttitude: [ 
-              0.999997873, -0.000110864294, -0.00205956151, 
-              0.000110908354, 0.999999994, 2.12784969e-05, 
-              0.00205955913, -2.15068743e-05, 0.999997879 ]
+              0.739966074, -0.672536635, -0.0120284779, 
+              0.672360563, 0.740055036, -0.0158056233, 
+              0.0195315963, 0.0036081508, 0.99980273 ]
             initialJointPositions: [ 
               0, 0, -0.349066, 0.698132, -0.349066, 0, 0, 0, -0.349066, 0.698132, 
               -0.349066, 0, 0, 0, 0, 0, 0, 0, 0.698132, -0.349066, 
-              -0.0872665, -1.39626, 0, 0, -0.349066, 0, 0.698132, 0.349066, 0.0872665, -1.39626, 
-              0, 0, -0.349066, 0, 0, 0, 0, 0 ]
+              -0.0872665, -1.39626, 0, 0, -0.349066, 0, 0.698132, 0, 0, -0.349066, 
+              0.698132, -0.349066, 0, 0, 0, -0.349066, 0.698132, 5.52962e-06 ]
             staticModel: false
             collisionDetection: true
             selfCollisionDetection: false
@@ -147,7 +149,7 @@ views:
     state: 
       show_rpy: true
       unique_rpy: false
-      show_quoternion: false
+      show_quaternion: false
       show_rotation_matrix: false
       coordinate: world
   - 
@@ -166,55 +168,41 @@ views:
       visible_polygon_elements: [ face ]
       highlighting: false
       collisionLines: false
-      restrictCameraRoll: true
-      verticalAxis: Z
-      lightingMode: normal
-      cullingMode: enabled
-      defaultHeadLight: true
-      defaultHeadLightIntensity: 0.75
-      headLightLightingFromBack: false
-      worldLight: true
-      worldLightIntensity: 0.5
-      worldLightAmbient: 0.25
-      additionalLights: true
-      fog: true
-      floorGrid: true
-      floorGridSpan: 10
-      floorGridInterval: 0.5
-      xzGridSpan: 10
-      xzGridInterval: 0.5
-      xzGrid: false
-      yzGridSpan: 10
-      yzGridInterval: 0.5
-      texture: true
-      lineWidth: 1
-      pointSize: 1
-      normalVisualization: false
-      normalLength: 0.01
-      lightweightViewChange: false
-      coordinateAxes: true
-      fpsTestIteration: 1
-      upsideDown: false
       cameras: 
         - 
           camera: [ System, Perspective ]
           isCurrent: true
-          fieldOfView: 0.610865
-          near: 0.04
-          far: 200
-          eye: [ 8.34618, 1.08214, 3.33574 ]
-          direction: [ -0.931138, -0.153754, -0.33067 ]
-          up: [ -0.326252, -0.0538722, 0.943747 ]
+          eye: [ 0.908295, 3.65464, 3.42705 ]
+          direction: [ -0.241892, -0.819112, -0.520138 ]
+          up: [ -0.147313, -0.498841, 0.854082 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
-          near: 0.04
-          far: 200
+      lightingMode: normal
+      cullingMode: enabled
+      worldLight: true
+      worldLightIntensity: 0.5
+      worldLightAmbient: 0.25
+      defaultHeadLight: true
+      defaultHeadLightIntensity: 0.75
+      world_light_shadow: true
       backgroundColor: [ 0.1, 0.1, 0.3 ]
-      gridColor: [ 0.9, 0.9, 0.9, 1 ]
-      xzgridColor: [ 0.9, 0.9, 0.9, 1 ]
-      yzgridColor: [ 0.9, 0.9, 0.9, 1 ]
-      isDedicatedItemCheckEnabled: false
+      lineWidth: 1
+      pointSize: 1
+      field_of_view: 35
+      clip_distances: [ 0.04, 200 ]
+      floorGrid: true
+      floorGridSpan: 10
+      floorGridInterval: 0.5
+      xzGrid: false
+      xzGridSpan: 10
+      xzGridInterval: 0.5
+      yzGrid: false
+      yzGridSpan: 10
+      yzGridInterval: 0.5
+      xy_grid_color: [ 0.9, 0.9, 0.9 ]
+      xz_grid_color: [ 0.9, 0.9, 0.9 ]
+      yz_grid_color: [ 0.9, 0.9, 0.9 ]
   - 
     id: 5
     plugin: Body
@@ -228,6 +216,7 @@ views:
       show_sliders: true
       show_dials: false
       show_phases: true
+      limit_ranges: false
   - 
     id: 6
     plugin: Body
@@ -246,7 +235,7 @@ views:
       preferred_coordinate_mode: base
       show_rpy: true
       unique_rpy: false
-      show_quoternion: false
+      show_quaternion: false
       show_rotation_matrix: false
       target_link_type: ik_link
   - 
@@ -261,15 +250,15 @@ views:
     mounted: true
 toolbars: 
   "TimeBar": 
-    minTime: 0
-    maxTime: 30
-    frameRate: 1000
-    playbackFrameRate: 60
-    idleLoopDrivenMode: false
-    currentTime: 7.707
-    speedScale: 1
-    syncToOngoingUpdates: true
-    autoExpansion: true
+    current_time: 0.01
+    min_time: 0
+    max_time: 42.498
+    frame_rate: 1000
+    playback_frame_rate: 60
+    idle_loop_driven_mode: false
+    playback_speed_ratio: 1
+    sync_to_ongoing_updates: true
+    auto_expansion: true
   "LeggedBodyBar": 
     stanceWidth: 0.15
   "KinematicsBar": 
@@ -283,8 +272,6 @@ toolbars:
     penetrationBlockDepth: 0.0005
     lazyCollisionDetectionMode: true
 Body: 
-  "BodyMotionEngine": 
-    updateJointVelocities: false
   "BodySelectionManager": 
     current_body_item: 4
     current_link: "WAIST"
@@ -321,17 +308,17 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 1285, 409 ]
+      sizes: [ 852, 0 ]
       children: 
         - 
           type: splitter
           orientation: horizontal
-          sizes: [ 332, 949 ]
+          sizes: [ 0, 848 ]
           children: 
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 624, 624 ]
+              sizes: [ 638, 638 ]
               children: 
                 - 
                   type: pane
@@ -343,7 +330,7 @@ viewAreas:
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 936, 312 ]
+              sizes: [ 1276, 0 ]
               children: 
                 - 
                   type: pane
@@ -355,7 +342,7 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 274, 974 ]
+          sizes: [ 280, 996 ]
           children: 
             - 
               type: pane
@@ -363,7 +350,7 @@ viewAreas:
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 379, 591 ]
+              sizes: [ 388, 604 ]
               children: 
                 - 
                   type: pane
