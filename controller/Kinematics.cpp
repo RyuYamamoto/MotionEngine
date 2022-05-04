@@ -65,14 +65,20 @@ bool Kinematics::calComKinematics(
   double error_eps = 1e-06;
   double lambda = 1.0e-12;
 
-  cnoid::VectorXd dq(body_->numJoints());
-  cnoid::VectorXd v(body_->numJoints());
-  cnoid::MatrixXd J_com(3, body_->numJoints());
-
   bool result = false;
+  auto right_foot_path = cnoid::JointPath::getCustomPath(body_, this->link("RLEG_JOINT5"), this->link("WAIST"));
+  auto left_foot_path = cnoid::JointPath::getCustomPath(body_, left_foot_, right_foot_);
+
+  cnoid::VectorXd dq(right_foot_path_->numJoints());
+  cnoid::VectorXd v(right_foot_path_->numJoints());
+  cnoid::MatrixXd J_com(3, right_foot_path_->numJoints());
+
+  body_->calcForwardKinematics();
 
   for (int n = 0; n < iteration; n++) {
-    if (ref_com.dot(ref_com) < error_eps) {
+    cur_com = body_->calcCenterOfMass();
+    cnoid::Vector3 d_com = (ref_com - cur_com);
+    if (d_com.dot(d_com) < error_eps) {
       result = true;
       break;
     }
@@ -80,17 +86,37 @@ bool Kinematics::calComKinematics(
     if (link_name == "RLEG_JOINT5")
       cnoid::calcCMJacobian(body_, right_foot_path_->baseLink(), J_com);
     else if (link_name == "LLEG_JOINT5")
-      cnoid::calcCMJacobian(body_, left_foot_path_->baseLink(), J_com);
+      cnoid::calcCMJacobian(body_, left_foot_, J_com);
 
     cnoid::MatrixXd JJ =
       J_com * J_com.transpose() + lambda * cnoid::MatrixXd::Identity(J_com.rows(), J_com.rows());
 
-    Eigen::ColPivHouseholderQR<cnoid::MatrixXd> QR;
-    dq = J_com.transpose() * QR.compute(JJ).solve(ref_com - cur_com) * gain;
-    for (std::size_t idx = 0; idx < body_->numJoints(); ++idx)
-      body_->joint(idx)->q() += 0.3 * dq(idx);
+    Eigen::ColPivHouseholderQR<Eigen::MatrixXd> QR;
+    //Eigen::FullPivLU<Eigen::MatrixXd> lu(J_com);
+    //dq = lu.solve(d_com);
+    dq = J_com.transpose() * QR.compute(JJ).solve(d_com) * gain;
+    for (std::size_t idx = 0; idx < right_foot_path->numJoints(); ++idx)
+      right_foot_path->joint(idx)->q() += 0.9 * dq(idx);
 
+    right_foot_path->calcForwardKinematics();
+    left_foot_path->calcForwardKinematics();
     body_->calcForwardKinematics();
+  }
+
+  if(result) {
+    if(link_name == "RLEG_JOINT5") {
+      for (std::size_t idx = 0; idx < right_foot_path->numJoints(); ++idx) {
+        cnoid::Link * joint = right_foot_path->joint(idx);
+        ref_angle_[joint->name()].ref_q = joint->q();
+      }
+    } else if(link_name == "LLEG_JOINT5") {
+      for (std::size_t idx = 0; idx < left_foot_path->numJoints(); ++idx) {
+        cnoid::Link * joint = left_foot_path->joint(idx);
+        ref_angle_[joint->name()].ref_q = joint->q();
+      }
+    }
+  } else {
+    std::cout << "failed." << std::endl;
   }
 
   return result;

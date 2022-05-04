@@ -48,9 +48,10 @@ void MotionEngine::control()
   double l_stick[2], r_stick[2];
   receiveCommand(l_stick, r_stick);
 
-  com_.z() += (0.0001 * l_stick[0]);
+  com_.y() += (0.0001 * l_stick[0]);
+  std::cout << "com z: " << com_.y() << std::endl;
   kinematics_->calComKinematics(com_, body_->calcCenterOfMass(), "RLEG_JOINT5");
-  kinematics_->calComKinematics(com_, body_->calcCenterOfMass(), "LLEG_JOINT5");
+  //kinematics_->calComKinematics(com_, body_->calcCenterOfMass(), "LLEG_JOINT5");
 
   joint_angles_ = kinematics_->getRefAngle();
 #if 0
