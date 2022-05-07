@@ -22,11 +22,15 @@ link_directories(
 set(MOTION_ENGINE_SRC
 	MotionEngine.hpp MotionEngine.cpp
 	Kinematics.hpp Kinematics.cpp
+	FootStepPlanner.hpp FootStepPlanner.cpp
+	PreviewController.hpp PreviewController.cpp
 	utils.hpp
 )
 
 add_library(Controller SHARED Controller.cpp ${MOTION_ENGINE_SRC})
 set_target_properties(Controller PROPERTIES PREFIX "")
+
+add_executable(test_foot_step_planner test_foot_step_planner.cpp FootStepPlanner.cpp)
 
 set(target Controller)
 target_link_libraries(Controller

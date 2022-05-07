@@ -1,4 +1,4 @@
-#include "PreviewControl.h"
+#include "PreviewController.hpp"
 
 void preview_control::interpolation_zmp_trajectory(vector<Vector3d> foot_step_list)
 {
